@@ -5,14 +5,14 @@ Description: indiegrator.com
 Mappings:
   EnvironmentMap:
     test:
-      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/e362647e-a677-40cc-ad47-ff4723b9fd28
+      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/d83116c8-cff8-44e5-b660-f74f468dfc8c
       NakedDomain: test.indiegrator.com
-      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/81a2afcb-600f-45c7-bcc2-6af9de8202b1
+      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/9c872c67-8cfd-4185-97f8-48c75007c557
       WwwDomain: www.test.indiegrator.com
     prod:
       NakedDomain: indiegrator.com
-      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/97528d68-8693-4091-82d2-60373f5cb19d
-      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/b88e4596-2c71-4c54-819c-a53e7189bdea
+      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/715bbad7-c23d-4b05-bf16-3c16093de1df
+      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/100324cc-9817-4252-b774-f1e90c689008
       WwwDomain: www.indiegrator.com
 
 Parameters:
