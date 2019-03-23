@@ -1,0 +1,206 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: indiegrator.com
+
+Mappings:
+  EnvironmentMap:
+    test:
+      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/d83116c8-cff8-44e5-b660-f74f468dfc8c
+      NakedDomain: test.indiegrator.com
+      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/9c872c67-8cfd-4185-97f8-48c75007c557
+      WwwDomain: www.test.indiegrator.com
+    prod:
+      NakedDomain: indiegrator.com
+      NakedCert: arn:aws:acm:us-east-1:349150094378:certificate/715bbad7-c23d-4b05-bf16-3c16093de1df
+      WwwCert: arn:aws:acm:us-east-1:349150094378:certificate/100324cc-9817-4252-b774-f1e90c689008
+      WwwDomain: www.indiegrator.com
+
+Parameters:
+  Environment:
+    AllowedValues:
+      - test
+      - prod
+    Type: String
+
+Resources:
+  NakedBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !FindInMap
+        - EnvironmentMap
+        - !Ref Environment
+        - NakedDomain
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        RoutingRules:
+          - RedirectRule:
+              HostName: !FindInMap
+                - EnvironmentMap
+                - !Ref Environment
+                - WwwDomain
+              HttpRedirectCode: 301
+              Protocol: https
+
+  NakedBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Principal: '*'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: NakedBucket
+                  - /*
+        Version: '2012-10-17'
+      Bucket: !Ref NakedBucket
+
+  NakedDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - NakedDomain
+        Comment: !FindInMap
+          - EnvironmentMap
+          - !Ref Environment
+          - NakedDomain
+        DefaultCacheBehavior:
+          DefaultTTL: 0
+          ForwardedValues:
+            QueryString: false
+          MaxTTL: 0
+          TargetOriginId: origin
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: true
+        # HttpVersion: http2
+        # IPV6Enabled: true
+        # IsIPV6Enabled: true
+        # Logging: {}
+        Origins:
+          - CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+            DomainName: !Select
+              - 1
+              - !Split
+                - ://
+                - !GetAtt NakedBucket.WebsiteURL
+            Id: origin
+        ViewerCertificate:
+          AcmCertificateArn: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - NakedCert
+          SslSupportMethod: sni-only
+
+  RecordSetGroup:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: indiegrator.com.
+      RecordSets:
+        - AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt NakedDistribution.DomainName
+          Name: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - NakedDomain
+          Type: A
+        - AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt NakedDistribution.DomainName
+          Name: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - NakedDomain
+          Type: AAAA
+        - AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt WwwDistribution.DomainName
+          Name: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - WwwDomain
+          Type: A
+        - AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt WwwDistribution.DomainName
+          Name: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - WwwDomain
+          Type: AAAA
+
+  WwwBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !FindInMap
+        - EnvironmentMap
+        - !Ref Environment
+        - WwwDomain
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  WwwBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Principal: '*'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: WwwBucket
+                  - /*
+        Version: '2012-10-17'
+      Bucket: !Ref WwwBucket
+
+  WwwDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - WwwDomain
+        Comment: !FindInMap
+          - EnvironmentMap
+          - !Ref Environment
+          - WwwDomain
+        DefaultCacheBehavior:
+          DefaultTTL: 0
+          ForwardedValues:
+            QueryString: false
+          MaxTTL: 0
+          TargetOriginId: origin
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: true
+        # HttpVersion: http2
+        # IPV6Enabled: true
+        # IsIPV6Enabled: true
+        # Logging: {}
+        Origins:
+          - CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+            DomainName: !Select
+              - 1
+              - !Split
+                - ://
+                - !GetAtt WwwBucket.WebsiteURL
+            Id: origin
+        ViewerCertificate:
+          AcmCertificateArn: !FindInMap
+            - EnvironmentMap
+            - !Ref Environment
+            - WwwCert
+          SslSupportMethod: sni-only
