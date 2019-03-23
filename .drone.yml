@@ -1,0 +1,96 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+x-defaults:
+  environment: &environment
+    AWS_ACCESS_KEY_ID:
+      from_secret: aws_access_key_id
+    AWS_REGION: us-east-1
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: aws_secret_access_key
+
+steps:
+  - name: stage (test)
+    image: 72636c/stratus:base
+    commands:
+      - stratus stage
+    environment:
+      <<: *environment
+      ENVIRONMENT: test
+    pull: always
+    when:
+      event:
+        - pull_request
+
+  - name: deploy (test)
+    image: 72636c/stratus:base
+    commands:
+      - stratus deploy
+    environment:
+      <<: *environment
+      ENVIRONMENT: test
+    pull: always
+    when:
+      event:
+        - pull_request
+
+  - name: sync (test)
+    image: 72636c/aws-cli:1
+    commands:
+      - aws s3 sync naked-bucket s3://test.indiegrator.com
+      - aws s3 sync www-bucket s3://www.test.indiegrator.com
+    environment:
+      <<: *environment
+      ENVIRONMENT: test
+    when:
+      event:
+        - pull_request
+
+  - name: stage (prod)
+    image: 72636c/stratus:base
+    commands:
+      - stratus stage
+    environment:
+      <<: *environment
+      ENVIRONMENT: prod
+    pull: always
+    when:
+      event:
+        - pull_request
+
+  - name: deploy (prod)
+    image: 72636c/stratus:base
+    commands:
+      - stratus deploy
+    environment:
+      <<: *environment
+      ENVIRONMENT: prod
+    pull: always
+    when:
+      branch:
+        - master
+      event:
+        - push
+
+  - name: sync (prod)
+    image: 72636c/aws-cli:1
+    commands:
+      - aws s3 sync naked-bucket s3://indiegrator.com
+      - aws s3 sync www-bucket s3://www.indiegrator.com
+    environment:
+      <<: *environment
+      ENVIRONMENT: prod
+    when:
+      branch:
+        - master
+      event:
+        - push
+
+---
+kind: signature
+hmac: bde24ed10b34232e86f5874a34aa434fbd09439b2d6d546d5a77a13428f9bcbc

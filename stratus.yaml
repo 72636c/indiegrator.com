@@ -1,0 +1,11 @@
+stacks:
+  - name: '{{env:ENVIRONMENT}}-indiegrator-dot-com'
+
+    capabilities: []
+    parameters:
+      - key: Environment
+        value: '{{env:ENVIRONMENT}}'
+    terminationProtection: true
+
+    policyFile: ./policy.json
+    templateFile: ./template.yaml
