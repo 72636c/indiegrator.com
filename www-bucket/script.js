@@ -18,25 +18,40 @@ const indies = [
   'https://ca.slack-edge.com/T02P37LGR-UFY1MK6NB-a7ad7d4e5496-511'
 ];
 
+/**
+ * Backlinks:
+ *
+ * https://pixabay.com/photos/accessory-appliance-blade-cheese-1238759/
+ * https://pixabay.com/photos/accessory-appliance-blade-cheese-1238760/
+ * https://pixabay.com/photos/age-bacteria-biology-blue-brie-1238285/
+ * https://pixabay.com/photos/beetroot-grater-rasp-grated-3505763/
+ * https://pixabay.com/photos/cheese-parmesan-grated-grater-food-1100774/
+ * https://pixabay.com/photos/food-spaghetti-pasta-lunch-dinner-2617533/
+ * https://pixabay.com/photos/grated-cheese-grater-cheese-961152/
+ * https://pixabay.com/photos/grater-bokeh-macro-toy-3671979/
+ * https://pixabay.com/photos/grater-cheese-grater-rasp-cheese-2886045/
+ * https://pixabay.com/photos/grater-countertop-kitchen-food-1695748/
+ * https://pixabay.com/photos/grater-green-lemon-food-cooking-2462480/
+ * https://pixabay.com/photos/nutmeg-grater-fresh-spice-nut-2427844/
+ * https://pixabay.com/photos/parmesan-cheese-grater-1732086/
+ * https://pixabay.com/photos/parmesan-garlic-baslikium-pine-nuts-1002838/
+ */
+
 const graters = [
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/747165_ShaverRasp_LifestyleCupcakes_Cupcakes7.4x7.4.jpg/600px-747165_ShaverRasp_LifestyleCupcakes_Cupcakes7.4x7.4.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Fine_Microplane_Grating_Hard_Cheese.jpg/640px-Fine_Microplane_Grating_Hard_Cheese.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Rape-pommedeterre.jpg/448px-Rape-pommedeterre.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kuechenreibe_fcm.jpg/624px-Kuechenreibe_fcm.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/746801_FlatCoarseGrater_Lifestyle9x9.jpg/577px-746801_FlatCoarseGrater_Lifestyle9x9.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Kitchen_grater.jpg/640px-Kitchen_grater.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/K%C3%BCchenreibe_2.jpg/400px-K%C3%BCchenreibe_2.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Flickr_-_cyclonebill_-_Parmesan.jpg/640px-Flickr_-_cyclonebill_-_Parmesan.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/K%C3%BCchenreibe_02_fcm.jpg/615px-K%C3%BCchenreibe_02_fcm.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Grating_Soft_Cheese.jpg/640px-Grating_Soft_Cheese.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Grated_carrot.jpg/640px-Grated_carrot.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/K%C3%BCchenreibe_1.jpg/400px-K%C3%BCchenreibe_1.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Carlas_Grater.jpg/576px-Carlas_Grater.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Cheese_grater.jpg/441px-Cheese_grater.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/74679000_RotaryGrater_LifestyleSalad6.5x6.2.jpg/626px-74679000_RotaryGrater_LifestyleSalad6.5x6.2.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kuechenreibe_IMGP2370_wp.jpg/383px-Kuechenreibe_IMGP2370_wp.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Cheese_Grater.jpg/345px-Cheese_Grater.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Microplane.jpg/600px-Microplane.jpg'
+  'https://cdn.pixabay.com/photo/2015/09/27/18/52/grated-cheese-961152_640.jpg',
+  'https://cdn.pixabay.com/photo/2015/10/23/11/23/food-1002838_640.jpg',
+  'https://cdn.pixabay.com/photo/2015/12/20/06/13/cheese-1100774_640.jpg',
+  'https://cdn.pixabay.com/photo/2016/03/05/19/10/age-1238285_640.jpg',
+  'https://cdn.pixabay.com/photo/2016/03/05/20/26/accessory-1238759_640.jpg',
+  'https://cdn.pixabay.com/photo/2016/03/05/20/27/accessory-1238760_640.jpg',
+  'https://cdn.pixabay.com/photo/2016/09/26/11/36/grater-1695748_640.jpg',
+  'https://cdn.pixabay.com/photo/2016/10/11/16/44/parmesan-1732086_640.jpg',
+  'https://cdn.pixabay.com/photo/2017/06/21/16/57/nutmeg-2427844_640.jpg',
+  'https://cdn.pixabay.com/photo/2017/07/01/19/59/grater-2462480_640.jpg',
+  'https://cdn.pixabay.com/photo/2017/08/10/03/05/food-2617533_640.jpg',
+  'https://cdn.pixabay.com/photo/2017/10/24/20/27/grater-2886045_640.jpg',
+  'https://cdn.pixabay.com/photo/2018/06/29/10/41/beetroot-3505763_640.jpg',
+  'https://cdn.pixabay.com/photo/2018/09/12/12/00/grater-3671979_640.jpg'
 ];
 
 const indie = document.getElementById('indie');
