@@ -38,21 +38,21 @@ const indies = [
  */
 
 const graters = [
-  'https://cdn.pixabay.com/photo/2015/09/27/18/52/grated-cheese-961152_640.jpg',
-  'https://cdn.pixabay.com/photo/2015/10/23/11/23/food-1002838_640.jpg',
-  'https://cdn.pixabay.com/photo/2015/12/20/06/13/cheese-1100774_640.jpg',
-  'https://cdn.pixabay.com/photo/2016/03/05/19/10/age-1238285_640.jpg',
-  'https://cdn.pixabay.com/photo/2016/03/05/20/26/accessory-1238759_640.jpg',
-  'https://cdn.pixabay.com/photo/2016/03/05/20/27/accessory-1238760_640.jpg',
-  'https://cdn.pixabay.com/photo/2016/09/26/11/36/grater-1695748_640.jpg',
-  'https://cdn.pixabay.com/photo/2016/10/11/16/44/parmesan-1732086_640.jpg',
-  'https://cdn.pixabay.com/photo/2017/06/21/16/57/nutmeg-2427844_640.jpg',
-  'https://cdn.pixabay.com/photo/2017/07/01/19/59/grater-2462480_640.jpg',
-  'https://cdn.pixabay.com/photo/2017/08/10/03/05/food-2617533_640.jpg',
-  'https://cdn.pixabay.com/photo/2017/10/24/20/27/grater-2886045_640.jpg',
-  'https://cdn.pixabay.com/photo/2018/06/29/10/41/beetroot-3505763_640.jpg',
-  'https://cdn.pixabay.com/photo/2018/09/12/12/00/grater-3671979_640.jpg'
-];
+  'accessory-appliance-blade-cheese-1238759',
+  'accessory-appliance-blade-cheese-1238760',
+  'age-bacteria-biology-blue-brie-1238285',
+  'beetroot-grater-rasp-grated-3505763',
+  'cheese-parmesan-grated-grater-food-1100774',
+  'food-spaghetti-pasta-lunch-dinner-2617533',
+  'grated-cheese-grater-cheese-961152',
+  'grater-bokeh-macro-toy-3671979',
+  'grater-cheese-grater-rasp-cheese-2886045',
+  'grater-countertop-kitchen-food-1695748',
+  'grater-green-lemon-food-cooking-2462480',
+  'nutmeg-grater-fresh-spice-nut-2427844',
+  'parmesan-cheese-grater-1732086',
+  'parmesan-garlic-baslikium-pine-nuts-1002838'
+].map(fileRoot => `graters/${fileRoot}.jpg`);
 
 const indie = document.getElementById('indie');
 const grater = document.getElementById('grater');
