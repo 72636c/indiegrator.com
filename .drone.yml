@@ -42,8 +42,8 @@ steps:
   - name: sync (test)
     image: 72636c/aws-cli:1
     commands:
-      - aws s3 sync naked-bucket s3://test.indiegrator.com
-      - aws s3 sync www-bucket s3://www.test.indiegrator.com
+      - aws s3 sync --delete naked-bucket s3://test.indiegrator.com
+      - aws s3 sync --delete www-bucket s3://www.test.indiegrator.com
     environment:
       <<: *environment
       ENVIRONMENT: test
@@ -80,8 +80,8 @@ steps:
   - name: sync (prod)
     image: 72636c/aws-cli:1
     commands:
-      - aws s3 sync naked-bucket s3://indiegrator.com
-      - aws s3 sync www-bucket s3://www.indiegrator.com
+      - aws s3 sync --delete naked-bucket s3://indiegrator.com
+      - aws s3 sync --delete www-bucket s3://www.indiegrator.com
     environment:
       <<: *environment
       ENVIRONMENT: prod
@@ -93,4 +93,4 @@ steps:
 
 ---
 kind: signature
-hmac: bde24ed10b34232e86f5874a34aa434fbd09439b2d6d546d5a77a13428f9bcbc
+hmac: 59a2f2135c16dcff3b6d57f3a56d0087c305eb43d1d53803168f4a0f96b91e78

@@ -15,8 +15,8 @@ scripts/request-certificates.sh
 ```shell
 AWS_REGION=us-east-1 ENVIRONMENT=test stratus deploy
 
-aws s3 sync naked-bucket s3://test.indiegrator.com
-aws s3 sync www-bucket s3://www.test.indiegrator.com
+aws s3 sync --delete naked-bucket s3://test.indiegrator.com
+aws s3 sync --delete www-bucket s3://www.test.indiegrator.com
 ```
 
 ### Prod
@@ -24,6 +24,6 @@ aws s3 sync www-bucket s3://www.test.indiegrator.com
 ```shell
 AWS_REGION=us-east-1 ENVIRONMENT=prod stratus deploy
 
-aws s3 sync naked-bucket s3://indiegrator.com
-aws s3 sync www-bucket s3://www.indiegrator.com
+aws s3 sync --delete naked-bucket s3://indiegrator.com
+aws s3 sync --delete www-bucket s3://www.indiegrator.com
 ```
