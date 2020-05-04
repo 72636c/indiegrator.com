@@ -40,7 +40,7 @@ steps:
         - pull_request
 
   - name: sync (test)
-    image: 72636c/aws-cli:1
+    image: amazon/aws-cli
     commands:
       - aws s3 sync --delete naked-bucket s3://test.indiegrator.com
       - aws s3 sync --delete www-bucket s3://www.test.indiegrator.com
@@ -78,7 +78,7 @@ steps:
         - push
 
   - name: sync (prod)
-    image: 72636c/aws-cli:1
+    image: amazon/aws-cli
     commands:
       - aws s3 sync --delete naked-bucket s3://indiegrator.com
       - aws s3 sync --delete www-bucket s3://www.indiegrator.com
@@ -93,4 +93,4 @@ steps:
 
 ---
 kind: signature
-hmac: 59a2f2135c16dcff3b6d57f3a56d0087c305eb43d1d53803168f4a0f96b91e78
+hmac: fca9cfd6a997e8c3e2114d2fd7833742c877d273cf8075f55d56e877e3bc733d
